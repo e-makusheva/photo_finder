@@ -1,4 +1,7 @@
-from flask import Flask
+from flask import Flask, render_template
+from flask_login import LoginManager
+
+from photo_app.forms import LoginForm
 from photo_app.modules import db
 
 def create_app():
@@ -10,5 +13,10 @@ def create_app():
     def hello():
         return 'Hello photographer!'
     
+    @app.route('/login')
+    def login():
+        title = 'Авторизация'
+        login_form = LoginForm()
+        return render_template('login.html', page_title=title, form=login_form)
+    
     return app
-
