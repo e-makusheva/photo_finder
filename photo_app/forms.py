@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectField
+from wtforms import BooleanField, StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 
 from photo_app.modules import User
@@ -7,6 +7,7 @@ from photo_app.modules import User
 class LoginForm(FlaskForm):
     username = StringField('Логин', validators=[DataRequired()], render_kw={"class": "wrap-input100 validate-input m-b-16"})
     password = PasswordField('Пароль', validators=[DataRequired()], render_kw={"class": "wrap-input100 validate-input m-b-16"})
+    remember_me = BooleanField('Запомнить', default=True, render_kw={"class": "input-checkbox100"})
     submit = SubmitField('Войти', render_kw={"class": "login100-form-btn"})
 
 class RegistrationForm(FlaskForm):

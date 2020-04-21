@@ -66,8 +66,8 @@
 
 					<div class="contact100-form-checkbox m-l-4">
 						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-						<label class="label-checkbox100" for="ckb1">
-							Запомнить
+						{{ form.remember_me() }}
+						{{ form.remember_me.label(class_='label-checkbox100') }}
 						</label>
 					</div>
 					
