@@ -4,7 +4,7 @@ from flask_login import LoginManager, current_user, login_required
 from photo_app.db import db
 from photo_app.admin.views import blueprint as admin_blueprint
 from photo_app.main.views import blueprint as main_blueprint
-from photo_app.user.modules import User
+from photo_app.user.models import User
 from photo_app.user.views import blueprint as user_blueprint
 
 def create_app():
