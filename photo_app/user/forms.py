@@ -16,7 +16,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Введите пароль', validators=[DataRequired()], render_kw={"class": "input--style-3"})
     password_check = PasswordField(
         'Повторите пароль', validators=[DataRequired(), EqualTo('password')], render_kw={"class": "input--style-3"})
-    role = SelectField('Выберите деятельность', choices=[('no_change', 'Не выбрано'), ('photographer', 'Фотограф'), ('user', 'Заказчик')], render_kw={"class": "rs-select2 js-select-simple select--no-search"})
+    roles = SelectField('Выберите деятельность', choices=[('no_change', 'Не выбрано'), ('photographer', 'Фотограф'), ('user', 'Заказчик')], render_kw={"class": "rs-select2 js-select-simple select--no-search"})
     submit = SubmitField('Подтвердить', render_kw={"class": "btn btn--pill btn--green"})
 
     def validate_username(self, username):

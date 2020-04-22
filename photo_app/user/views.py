@@ -3,6 +3,7 @@ from flask_login import current_user, login_user, logout_user
 
 from photo_app.user.forms import LoginForm, RegistrationForm
 from photo_app.user.models import User
+from photo_app import db
 
 blueprint = Blueprint('user', __name__, url_prefix='/users')
 
@@ -40,3 +41,16 @@ def register():
     title = 'Регистрация'
     form = RegistrationForm()
     return render_template('user/registration_form.html', page_title=title, form=form)
+
+@blueprint.route('/process-reg', methods=['POST'])
+def process_reg():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        new_user = User(username=form.username.data, email=form.email.data, roles=form.roles.data)
+        new_user.set_password(form.password.data)
+        db.session.add(new_user)
+        db.session.commit()
+        flash('Регистрация прошла успешно')
+        return redirect(url_for('user.login'))
+    flash('Пожалуйста, исправьте ошибки')
+    return redirect(url_for('user.register'))

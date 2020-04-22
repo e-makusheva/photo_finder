@@ -33,20 +33,20 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">{{ page_title }}</h2>
-                    <form action="{{ url_for('user.register') }}" method="POST">
+                    <form action="{{ url_for('user.process_reg') }}" method="POST">
 						{{ form.hidden_tag() }}
                         <div class="input-group">
 							{{ form.username.label }}
 							{{ form.username() }}
 							{% for error in form.username.errors %}
-							<span style="color: orange;">{{ error }}</span>
+							<span style="color: red;">{{ error }}</span>
 							{% endfor %}
                         </div>
                         <div class="input-group">
                             <div class="rs-select2 js-select-simple select--no-search">
-								{{ form.role.label }}
-								{{ form.role() }}
-								{% for error in form.role.errors %}
+								{{ form.roles.label }}
+								{{ form.roles() }}
+								{% for error in form.roles.errors %}
 								<span style="color: red;">{{ error }}</span>
 								{% endfor %}
                                 <div class="select-dropdown"></div>
