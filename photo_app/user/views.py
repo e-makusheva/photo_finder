@@ -12,7 +12,7 @@ def login():
         return redirect(url_for('index'))
     title = 'Авторизация'
     login_form = LoginForm()
-    return render_template('login.html', page_title=title, form=login_form)
+    return render_template('user/login.html', page_title=title, form=login_form)
 
 @blueprint.route('/process-login', methods=['POST'])
 def process_login():
@@ -39,4 +39,4 @@ def register():
         return redirect(url_for('index'))
     title = 'Регистрация'
     form = RegistrationForm()
-    return render_template('registration_form.html', page_title=title, form=form)
+    return render_template('user/registration_form.html', page_title=title, form=form)
