@@ -12,12 +12,12 @@ class LoginForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     username = StringField('Логин', validators=[DataRequired()], render_kw={"class": "input--style-3"})
-    email = StringField('E-mail', validators=[DataRequired(), Email()], render_kw={"class": "input-group"})
-    password = PasswordField('Пароль', validators=[DataRequired()], render_kw={"class": "input-group"})
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"class": "input--style-3"})
+    password = PasswordField('Введите пароль', validators=[DataRequired()], render_kw={"class": "input--style-3"})
     password_check = PasswordField(
-        'Повторите пароль', validators=[DataRequired(), EqualTo('password')], render_kw={"class": "input-group"})
+        'Повторите пароль', validators=[DataRequired(), EqualTo('password')], render_kw={"class": "input--style-3"})
     role = SelectField('Выберите деятельность', choices=[('no_change', 'Не выбрано'), ('photographer', 'Фотограф'), ('user', 'Заказчик')], render_kw={"class": "rs-select2 js-select-simple select--no-search"})
-    submit = SubmitField('Регистрация', render_kw={"class": "p-t-10"})
+    submit = SubmitField('Подтвердить', render_kw={"class": "btn btn--pill btn--green"})
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
