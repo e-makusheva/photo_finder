@@ -5,12 +5,9 @@
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Colorlib Templates">
-    <meta name="author" content="Colorlib">
-    <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
+    <title>{{ page_title }}</title>
 
     <!-- Icons font CSS-->
     <link href="../static/Registration/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -32,8 +29,8 @@
             <div class="card card-3">
                 <div class="card-heading"></div>
                 <div class="card-body">
-                    <h2 class="title">Информация для регистрации</h2>
-                    <form method="POST">
+                    <h2 class="title">{{ page_title }}</h2>
+                    <form action="{{ url_for('User.registration') }}" method="POST">
                         <div class="input-group">
                             <input class="input--style-3" type="text" placeholder="Логин" name="login">
                         </div>
