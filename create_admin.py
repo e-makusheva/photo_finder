@@ -2,7 +2,8 @@ from getpass import getpass
 import sys
 
 from photo_app import create_app
-from photo_app.modules import User, db
+from photo_app.db import db
+from photo_app.user.models import User
 
 app = create_app()
 
@@ -26,7 +27,7 @@ with app.app_context():
         print('Пароли не совпадают')
         sys.exit(0)
 
-    new_user = User(username=username, email=email, roles='1')
+    new_user = User(username=username, email=email, roles='admin')
     new_user.set_password(password)
 
     db.session.add(new_user)
