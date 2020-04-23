@@ -10,7 +10,7 @@ blueprint = Blueprint('user', __name__, url_prefix='/users')
 @blueprint.route('/login')
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('main_page.index'))
     title = 'Авторизация'
     login_form = LoginForm()
     return render_template('user/login.html', page_title=title, form=login_form)
@@ -23,8 +23,7 @@ def process_login():
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             flash('Вы вошли на сайт')
-            return redirect(url_for('index'))
-
+            return redirect(url_for('main_page.index'))
     flash('Неправильный логин или пароль')
     return redirect(url_for('user.login'))
 
@@ -32,12 +31,12 @@ def process_login():
 def logout():
     logout_user()
     flash('Вы успешно разлогинились')
-    return redirect(url_for('index'))
+    return redirect(url_for('main_page.index'))
 
 @blueprint.route('/register')
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('main_page.index'))
     title = 'Регистрация'
     form = RegistrationForm()
     return render_template('user/registration_form.html', page_title=title, form=form)
@@ -52,5 +51,13 @@ def process_reg():
         db.session.commit()
         flash('Регистрация прошла успешно')
         return redirect(url_for('user.login'))
+    else:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash('Ошибка в поле "{}": - {}'.format(
+                    getattr(form, field).label.text,
+                    error
+                ))
+        return redirect(url_for('user.register'))
     flash('Пожалуйста, исправьте ошибки')
     return redirect(url_for('user.register'))

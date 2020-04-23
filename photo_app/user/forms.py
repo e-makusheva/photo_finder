@@ -5,8 +5,8 @@ from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from photo_app.user.models import User
 
 class LoginForm(FlaskForm):
-    username = StringField('Логин', validators=[DataRequired()], render_kw={"class": "wrap-input100 validate-input m-b-16"})
-    password = PasswordField('Пароль', validators=[DataRequired()], render_kw={"class": "wrap-input100 validate-input m-b-16"})
+    username = StringField('Логин', validators=[DataRequired()], render_kw={"class": "input100"})
+    password = PasswordField('Пароль', validators=[DataRequired()], render_kw={"class": "input100"})
     remember_me = BooleanField('Запомнить', default=True, render_kw={"class": "input-checkbox100"})
     submit = SubmitField('Войти', render_kw={"class": "login100-form-btn"})
 

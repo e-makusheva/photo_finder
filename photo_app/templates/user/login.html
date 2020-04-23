@@ -27,47 +27,33 @@
 {% include 'menu.html' %}
 <body>
 	<div class="limiter">
+		<form action='{{ url_for('user.process_login') }}' method='POST'>
+			{{ form.hidden_tag() }}
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
 				<form class="login100-form validate-form">
 					<span class="login100-form-title p-b-55">
 						{{ page_title }}
 					</span>
-					{% with messages = get_flashed_messages() %}
-						{% if messages %}
-						<div class="alert alert-warning" role="alert">
-							{% for message in messages %}
-								{{ message }}<br>
-							{% endfor %}
-						</div>
-						{% endif %}
-					{% endwith %}
-					<form action='{{ url_for('user.process_login') }}' method='POST'>
-					{{ form.hidden_tag() }}
 					<div class="wrap-input100 validate-input m-b-16">
-						<div class="input100" type="text">
 						{{ form.username.label }} 
 						{{ form.username() }}
-						</div>
+						{% for error in form.username.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
 						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<span class="lnr lnr-envelope"></span>
-						</span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-16">
-						<div class="input100" type="password">
 						{{ form.password.label }} 
 						{{ form.password() }}
-						</div>
+						{% for error in form.password.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
 						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<span class="lnr lnr-lock"></span>
-						</span>
 					</div>
 
 					<div class="contact100-form-checkbox m-l-4">
-						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 						{{ form.remember_me() }}
 						{{ form.remember_me.label(class_='label-checkbox100') }}
 						</label>
