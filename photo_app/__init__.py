@@ -7,6 +7,7 @@ from photo_app.admin.views import blueprint as admin_blueprint
 from photo_app.main.views import blueprint as main_blueprint
 from photo_app.user.models import User
 from photo_app.user.views import blueprint as user_blueprint
+from photo_app.profile.views import blueprint as profile_blueprint
 
 def create_app():
     app = Flask(__name__)
@@ -21,6 +22,7 @@ def create_app():
     app.register_blueprint(admin_blueprint)
     app.register_blueprint(main_blueprint)
     app.register_blueprint(user_blueprint)
+    app.register_blueprint(profile_blueprint)
 
     @login_manager.user_loader
     def load_user(user_id):
