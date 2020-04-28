@@ -1,4 +1,4 @@
-from flask import Blueprint, current_app, render_template
+from flask import Blueprint, current_app, render_template, request
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired
 
@@ -13,6 +13,5 @@ def index():
     return render_template('index.html', page_title=title)
 
 def profiles():
-    profile = User(roles='photographer')
-    
+    profile_list = User.query.filter(User.roles == 'photographer')
 
