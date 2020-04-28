@@ -1,4 +1,9 @@
 from flask import Blueprint, current_app, render_template
+from flask_wtf import FlaskForm
+from wtforms.validators import DataRequired
+
+from photo_app import db
+from photo_app.user.models import User
 
 blueprint = Blueprint('main_page', __name__)
 
@@ -6,3 +11,8 @@ blueprint = Blueprint('main_page', __name__)
 def index():
     title = 'Photo Finder'
     return render_template('index.html', page_title=title)
+
+def profiles():
+    profile = User(roles='photographer')
+    
+
