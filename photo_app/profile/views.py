@@ -7,7 +7,7 @@ from photo_app import db
 
 blueprint = Blueprint('profile', __name__, url_prefix='/profile')
 
-@blueprint.route('/<int:user_id>')
+@blueprint.route('/profile')
 def profile(user_id):
     my_profile = Profile.query.filter(Profile.user_id == current_user.id).first()
     if not my_profile:

@@ -1,5 +1,5 @@
-from flask import abort, Blueprint, flash, render_template, request, redirect, url_for
-from flask_login import current_user, login_user, logout_user
+from flask import abort, Blueprint, flash, current_app, render_template, redirect, request, url_for
+from flask_login import current_user, login_required, login_user, logout_user
 
 from photo_app.user.forms import LoginForm, ProfileForm, RegistrationForm
 from photo_app.user.models import User, Profile
@@ -65,8 +65,6 @@ def process_reg():
 @blueprint.route('/profile')
 def profile():
     my_profile = Profile.query.filter(Profile.user_id == current_user.id).first()
-    if not my_profile:
-        abort(404)
     return render_template('profile/profile.html', about=my_profile.about, profile=my_profile)
 
 @blueprint.route('/edit_profile')
@@ -82,7 +80,5 @@ def process_edit():
         db.session.add(new_profile)
         db.session.commit()
         flash('Профиль успешно заполнен')
-        return redirect(url_for('main_page.index')
-    flash('Пожалуйста, исправьте ошибки')
-    return redirect(url_for('profile.edit_profile'))
+    return redirect(url_for('main_page.index'))
 
