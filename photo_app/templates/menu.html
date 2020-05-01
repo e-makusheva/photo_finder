@@ -12,7 +12,7 @@
         <li class="nav-item">
           {% if current_user.is_authenticated %}
         <li class="nav-item">
-            <a class="nav-link" href="profile.profile">Профиль</a>
+            <a class="nav-link" href="{{ url_for('profile.profile', user_id=profile.user_id) }}">Профиль</a>
           {% else %}
           {% endif %}
         </li>

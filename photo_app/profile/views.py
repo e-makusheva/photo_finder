@@ -5,15 +5,14 @@ from photo_app.profile.forms import ProfileForm
 from photo_app.profile.models import Profile
 from photo_app import db
 
-blueprint = Blueprint('profile', __name__, url_prefix='/profiles')
+blueprint = Blueprint('profile', __name__, url_prefix='/profile')
 
-@blueprint.route('/<int:profile_id>')
-def profile(profile_id):
-    my_profile = Profile.query.filter(Profile.profile_id == profile_id).first()
+@blueprint.route('/<int:user_id>')
+def profile(user_id):
+    my_profile = Profile.query.filter(Profile.user_id == current_user.id).first()
     if not my_profile:
         abort(404)
-    profile = ProfileForm(user_id=my_profile.user_id)
-    return render_template('profile/profile.html', profile=my_profile)
+    return render_template('profile/profile.html', about=my_profile.about, profile=my_profile)
 
 @blueprint.route('/edit_profile')
 def edit_profile():
