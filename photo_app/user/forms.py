@@ -31,6 +31,7 @@ class RegistrationForm(FlaskForm):
 
 class ProfileForm(FlaskForm):
     profile_id = HiddenField('ID пользователя', validators=[DataRequired()])
+    fullname = StringField('Полное имя', validators=[DataRequired()], render_kw={"class": "input100"})
     city = StringField('Город', validators=[DataRequired()], render_kw={"class": "input100"})
     about = StringField('О себе', validators=[DataRequired()], render_kw={"class": "input100"})
     Instagram = StringField('Адрес страницы в Instagram', validators=[DataRequired()], render_kw={"class": "input100"})

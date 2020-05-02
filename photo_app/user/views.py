@@ -64,21 +64,32 @@ def process_reg():
 
 @blueprint.route('/profile')
 def profile():
-    my_profile = Profile.query.filter(Profile.user_id == current_user.id).first()
-    return render_template('profile/profile.html', about=my_profile.about, profile=my_profile)
+    my_profile = Profile.query.filter(User.id == current_user.id).first()
+    return render_template('profile/profile.html', profile=my_profile)
 
 @blueprint.route('/edit_profile')
+@login_required
 def edit_profile():
-    profile_form = ProfileForm()
+    profile_form = ProfileForm(user_id=current_user.id)
     return render_template('profile/edit_profile.html', form=profile_form)
         
 @blueprint.route('/process_edit', methods=['POST'])
+@login_required
 def process_edit():
     profile_form = ProfileForm()
     if profile_form.validate_on_submit():
-        new_profile = Profile(city=profile_form.city.data, about=profile_form.about.data, Instagram=profile_form.Instagram.data, contacts=profile_form.contacts.data)
-        db.session.add(new_profile)
-        db.session.commit()
-        flash('Профиль успешно заполнен')
-    return redirect(url_for('main_page.index'))
+        if Profile.query.filter(User.id == current_user.id).first():
+            profile_data = Profile(user_id=current_user.id, fullname=profile_form.fullname.data, city=profile_form.city.data, about=profile_form.about.data, Instagram=profile_form.Instagram.data, contacts=profile_form.contacts.data)
+            db.session.add(profile_data)
+            db.session.commit()
+            flash('Профиль успешно заполнен')
+    else:
+        for field, errors in profile_form.errors.items():
+            for error in errors:
+                flash('Ошибка в поле "{}": - {}'.format(
+                    getattr(profile_form, field).label.text,
+                    error
+                ))
+    return redirect(url_for('user.profile'))
+
 
