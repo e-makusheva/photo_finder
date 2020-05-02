@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, StringField, PasswordField, SubmitField, SelectField
+from wtforms import BooleanField, HiddenField, StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 
 from photo_app.user.models import User
@@ -28,3 +28,12 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Такой email уже существует')
+
+class ProfileForm(FlaskForm):
+    profile_id = HiddenField('ID пользователя', validators=[DataRequired()])
+    fullname = StringField('Полное имя', validators=[DataRequired()], render_kw={"class": "input100"})
+    city = StringField('Город', validators=[DataRequired()], render_kw={"class": "input100"})
+    about = StringField('О себе', validators=[DataRequired()], render_kw={"class": "input100"})
+    Instagram = StringField('Адрес страницы в Instagram', validators=[DataRequired()], render_kw={"class": "input100"})
+    contacts = StringField('Контакты', validators=[DataRequired()], render_kw={"class": "input100"})
+    submit = SubmitField('Сохранить', render_kw={"class": "btn btn-primary"})
