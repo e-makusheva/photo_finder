@@ -1,1 +1,1 @@
-# photo_finder
+# Photo Finder — веб-сервис для поиска фотографов
